@@ -47,7 +47,7 @@ const SignUp = () => {
             <div>
                 <h2 className='form-title'>Sign Up</h2>
                 <form onSubmit={handleCreateUser}>
-                    <div className="input-group">
+                     <div className="input-group">
                         <label htmlFor="email">Email</label>
                         <input onBlur={handleEmailBlur} type="email" name="email" id="" required/>
                     </div>
