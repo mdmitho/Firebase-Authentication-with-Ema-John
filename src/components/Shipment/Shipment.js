@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
 const Shipment = () => {
+    const [user] = useAuthState(auth)
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
@@ -13,10 +14,6 @@ const Shipment = () => {
 const handleNameBlur = event=>{
     setName(event.target.value)
 }
-
-    const handleEmailBlur = event =>{
-        setEmail(event.target.value);
-    }
 
     const handleAddressdBlur = event =>{
         setAddress(event.target.value);
@@ -28,7 +25,8 @@ const handleNameBlur = event=>{
 
     const handleCreateUser = event =>{
         event.preventDefault();
-      
+      const shipping = {name, email, address,phone}
+      console.log(shipping);
         
         
     }
@@ -46,15 +44,15 @@ const handleNameBlur = event=>{
                 </div>
                  <div className="input-group">
                     <label htmlFor="email">Your Email</label>
-                    <input onBlur={handleEmailBlur} type="email" name="email" id="" required/>
+                    <input value={user?.email} readOnly type="email" name="email" id="" required/>
                 </div>
                 <div className="input-group">
                     <label htmlFor="password">Address</label>
                     <input onBlur={handleAddressdBlur} type="text" name="Address" id=""  required/>
                 </div>
                 <div className="input-group">
-                    <label htmlFor="confirm-password">Phone Number </label>
-                    <input onBlur={handlePhonedBlur} type="text" name="phone-number" id="" />
+                    <label htmlFor="phone">Phone Number </label>
+                    <input onBlur={handlePhonedBlur} type="text" name="phone-number" id="" required />
                 </div>
                 <p style={{color: 'red'}}>{error}</p>
                 <input className='form-submit' type="submit" value="Add Shipping"/>

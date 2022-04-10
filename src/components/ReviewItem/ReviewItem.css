@@ -8,10 +8,12 @@
 }
 .review-item img{
     width: 91px;
+    border-radius: 10px;
 }
 
 .review-item-details p{
     margin: 0;
+    margin-left: 20px;
 }
 
 .review-item-details-container{
